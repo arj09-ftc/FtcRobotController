@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.drive.opmode;
 
 import com.acmerobotics.roadrunner.Pose2d;
-
+//coordinates for the robot positions. USE THE MEEP MEEP TO VISUALIZE EACH POSE!
 public class BlueSpecimen {
        // round 1 - drop preloaded specimen and move on sample 1 to observation zone
        public static Pose2d INIT_POS = new Pose2d(-15, 60.75, Math.toRadians(90));
