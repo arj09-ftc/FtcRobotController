@@ -87,5 +87,12 @@ public class IncredibotsBlueSpecimen extends LinearOpMode {
                 //PARKS
                 .strafeToLinearHeading(BlueSpecimen.PARK_POS.position, BlueSpecimen.PARK_POS.heading)
                 .build();
+ 
+        waitForStart();
+
+        while (opModeIsActive()) {
+            break;
+
+        }
     }
 }
