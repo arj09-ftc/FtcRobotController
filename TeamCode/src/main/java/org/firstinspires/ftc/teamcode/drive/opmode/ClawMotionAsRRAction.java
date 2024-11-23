@@ -16,27 +16,33 @@ public class ClawMotionAsRRAction implements Action {
     private double closePosition;
     private boolean initialized = false;
     private boolean waitForAction = false;
-    ElapsedTime timer;
+    private boolean shortWait = false;
+    private ElapsedTime timer;
 
-    public ClawMotionAsRRAction(RobotHardware robotHardware, boolean open, double openPosition, double closePosition, boolean waitForAction) {
+    public ClawMotionAsRRAction(RobotHardware robotHardware, boolean open, double openPosition, double closePosition, boolean waitForAction, boolean shortWait) {
         this.myHardware = robotHardware;
         this.open = open;
         this.openPosition = openPosition;
         this.closePosition = closePosition;
         this.initialized = false;
         this.waitForAction = waitForAction;
+        this.shortWait = shortWait;
     }
 
     @Override
     public boolean run (@NonNull TelemetryPacket packet) {
         if (!initialized) {
             myHardware.operateClawServo(open, openPosition, closePosition);
-            initialized = true;
             timer = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
+            initialized = true;
         }
 
         if (waitForAction) {
-            boolean timerPending = timer.milliseconds() < 500;
+            int timeDuration = 400;
+            if (shortWait) {
+                timeDuration = 200;
+            }
+            boolean timerPending = timer.milliseconds() < timeDuration;
             Log.i("=== INCREDIBOTS ===", "INSIDE CLAWMOTIONASRRACTION - WAITING FOR CLAW: " + timerPending);
             //tell RR we need to keep running if 500 ms has not elapsed
             return (timerPending);
