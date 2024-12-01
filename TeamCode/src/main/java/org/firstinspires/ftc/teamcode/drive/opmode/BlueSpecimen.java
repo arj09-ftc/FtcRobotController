@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.Pose2d;
 
 public class BlueSpecimen {
        // round 1 - drop preloaded specimen and move on sample 1 to observation zone
+       public static final double H = Math.toRadians(90);
        public static Pose2d INIT_POS = new Pose2d(-15, 60.75, Math.toRadians(90));
        public static Pose2d HANG_SPEC_1 = new Pose2d(-5, 33, Math.toRadians(90));
        //-
@@ -51,6 +52,8 @@ public class BlueSpecimen {
        public static Pose2d HANG_SPEC_4 = new Pose2d(3, 33, Math.toRadians(90));
        //-
        public static Pose2d PARK_POS = new Pose2d(-52, 62, Math.toRadians(90));
+
+
 
 
 }
