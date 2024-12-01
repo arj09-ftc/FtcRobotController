@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.meepmeep;
 
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
@@ -14,7 +15,7 @@ public class MeepMeepTest {
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(150, 125, Math.toRadians(180), Math.toRadians(180), 13.5)
+                .setConstraints(100, 100, Math.toRadians(180), Math.toRadians(180), 13.5)
                 .build();
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_OFFICIAL)
@@ -22,18 +23,19 @@ public class MeepMeepTest {
                 .setBackgroundAlpha(0.95f)
                 .addEntity(myBot)
                 .start();
-        
-        myBot.runAction(myBot.getDrive().actionBuilder(SampCoord.INIT_POS)
-                .strafeToLinearHeading(SampCoord.HANG_SPECIMEN.position, SampCoord.HANG_SPECIMEN.heading)
-                .strafeToLinearHeading(SampCoord.ALIGN_WITH_SAMP_1.position, SampCoord.ALIGN_WITH_SAMP_1.heading)
-                .strafeToLinearHeading(SampCoord.DROP_SAMP.position, SampCoord.DROP_SAMP.heading)
-                .strafeToLinearHeading(SampCoord.ALIGN_WITH_SAMP_2.position, SampCoord.ALIGN_WITH_SAMP_2.heading)
-                .strafeToLinearHeading(SampCoord.DROP_SAMP.position, SampCoord.DROP_SAMP.heading)
-                .strafeToLinearHeading(SampCoord.PICK_3RD_SAMP.position, SampCoord.PICK_3RD_SAMP.heading)
-                .strafeToLinearHeading(SampCoord.DROP_SAMP.position, SampCoord.DROP_SAMP.heading)
-                .strafeToLinearHeading(SampCoord.COMMON_ARM_CLOSE_POS.position, SampCoord.PUSH_SAMP_1.heading)
-                .strafeToLinearHeading(SampCoord.IN_FRONT_OF_ASCENT_ZONE.position, SampCoord.IN_FRONT_OF_ASCENT_ZONE.heading)
-                .strafeToLinearHeading(SampCoord.PARK_POS.position, SampCoord.PARK_POS.heading)
+
+        myBot.runAction(myBot.getDrive().actionBuilder(BlueSpecimen.INIT_POS)
+                        //.strafeToLinearHeading(BlueSpecimen.BACK_POST_HANG.position, BlueSpecimen.BACK_POST_HANG.heading)
+                        .splineToConstantHeading(BlueSpecimen.SLIDE_UNDER_SAMP_1, BlueSpecimen.H)
+                        .splineToConstantHeading(BlueSpecimen.PUSH_SAMP_1, BlueSpecimen.H)
+                .splineToConstantHeading(BlueSpecimen.SLIDE_UNDER_SAMP_1, BlueSpecimen.H)
+                        .splineToConstantHeading(BlueSpecimen.SLIDE_UNDER_SAMP_2, BlueSpecimen.H)
+                        .splineToConstantHeading(BlueSpecimen.PUSH_SAMP_2, BlueSpecimen.H)
+                .splineToConstantHeading(BlueSpecimen.SLIDE_UNDER_SAMP_2, BlueSpecimen.H)
+                .splineToConstantHeading(BlueSpecimen.SLIDE_UNDER_SAMP_3, BlueSpecimen.H)
+                        .splineToConstantHeading(BlueSpecimen.PUSH_SAMP_3, BlueSpecimen.H)
+
+
                 .build());
     }
 }
