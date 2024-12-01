@@ -1,19 +1,20 @@
 package org.firstinspires.ftc.meepmeep;
 
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
+import java.lang.reflect.Field;
+
 
 public class MeepMeepTest {
     public static void main(String[] args) {
-        MeepMeep meepMeep =  new MeepMeep(800);
+        MeepMeep meepMeep = new MeepMeep(700);
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 15)
+                .setConstraints(150, 125, Math.toRadians(180), Math.toRadians(180), 13.5)
                 .build();
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_OFFICIAL)
@@ -21,28 +22,18 @@ public class MeepMeepTest {
                 .setBackgroundAlpha(0.95f)
                 .addEntity(myBot)
                 .start();
-
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-25, 62, Math.toRadians(0)))
-
-                  /*
-                        POS 2
-
-                        //strafes in front of blue tape for net zone
-                        .strafeTo(new Vector2d(35, 40))
-                        .turn(Math.toRadians(45))
-                //EXTEND ARM
-                        .strafeTo(new Vector2d(55, 55))
-                */
-
-                .strafeTo(new Vector2d(35, 38))
-                .turn(Math.toRadians(45))
-                .strafeTo(new Vector2d(55, 55))
-
-                .strafeTo(new Vector2d(45, 45))
-                .strafeTo(new Vector2d(-55, 55))
-                .turn(Math.toRadians(-135))
-                .lineToY(62)
-
+        
+        myBot.runAction(myBot.getDrive().actionBuilder(SampCoord.INIT_POS)
+                .strafeToLinearHeading(SampCoord.HANG_SPECIMEN.position, SampCoord.HANG_SPECIMEN.heading)
+                .strafeToLinearHeading(SampCoord.ALIGN_WITH_SAMP_1.position, SampCoord.ALIGN_WITH_SAMP_1.heading)
+                .strafeToLinearHeading(SampCoord.DROP_SAMP.position, SampCoord.DROP_SAMP.heading)
+                .strafeToLinearHeading(SampCoord.ALIGN_WITH_SAMP_2.position, SampCoord.ALIGN_WITH_SAMP_2.heading)
+                .strafeToLinearHeading(SampCoord.DROP_SAMP.position, SampCoord.DROP_SAMP.heading)
+                .strafeToLinearHeading(SampCoord.PICK_3RD_SAMP.position, SampCoord.PICK_3RD_SAMP.heading)
+                .strafeToLinearHeading(SampCoord.DROP_SAMP.position, SampCoord.DROP_SAMP.heading)
+                .strafeToLinearHeading(SampCoord.COMMON_ARM_CLOSE_POS.position, SampCoord.PUSH_SAMP_1.heading)
+                .strafeToLinearHeading(SampCoord.IN_FRONT_OF_ASCENT_ZONE.position, SampCoord.IN_FRONT_OF_ASCENT_ZONE.heading)
+                .strafeToLinearHeading(SampCoord.PARK_POS.position, SampCoord.PARK_POS.heading)
                 .build());
     }
 }

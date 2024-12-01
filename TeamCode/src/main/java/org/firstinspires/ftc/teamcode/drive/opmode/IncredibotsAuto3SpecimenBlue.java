@@ -108,7 +108,6 @@ public class IncredibotsAuto3SpecimenBlue extends LinearOpMode {
                 //.waitSeconds(0.6)
                 .stopAndAdd(GetClawControlAction(true, IncredibotsArmControl.CLAW_OPEN_POSITION, IncredibotsArmControl.CLAW_CLOSE_POSITION, true, true))
                 .build();
-
         Action pickAndSnapSpecimenTwo = drive.actionBuilder(MOVE_TO_BRACE_SUB_SPECIMEN_ONE)
                 .stopAndAdd(GetSlideControlAction(IncredibotsArmControl.SLIDE_POSITION_RESTING, false))
                 .stopAndAdd(GetArmControlAction(IncredibotsArmControl.CLAW_ARM_PICK_SPECIMEN, IncredibotsArmControl.CLAW_ARM_VELOCITY, false))
